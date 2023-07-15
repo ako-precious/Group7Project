@@ -35,6 +35,7 @@ namespace Group7Project.Controllers
             if(ModelState.IsValid) { 
                 _dbContext.Categories.Add(obj);
                 _dbContext.SaveChanges();
+                TempData["success"] = "Category created successfully";
                 return RedirectToAction("Index");
             }
             return View(obj);
@@ -52,7 +53,7 @@ namespace Group7Project.Controllers
             {
                 return NotFound();
             }
-            return View();
+            return View(category);
 
         }
 
@@ -66,11 +67,27 @@ namespace Group7Project.Controllers
             }
             if (ModelState.IsValid)
             {
-                _dbContext.Categories.Add(obj);
+                _dbContext.Categories.Update(obj);
                 _dbContext.SaveChanges();
                 return RedirectToAction("Index");
             }
+            TempData["success"] = "Category edit successfully";
             return View(obj);
+        }
+
+        public IActionResult Delete(int? id)
+        {
+            
+            var obj = _dbContext.Categories.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            _dbContext.Categories.Remove(obj);
+            _dbContext.SaveChanges();
+            TempData["success"] = "Category deleted successfully";
+            return RedirectToAction("Index");
+
         }
     }
 }

@@ -3,6 +3,8 @@
     ViewData["Title"] = "Index";
 }
 
+
+
 <div class="conatiner p-3">
     <div class="row pt-4 pb-2">
        <div class="col-6" >
@@ -15,8 +17,8 @@
         </div>
 
     </div>
-
-
+     
+    <partial name="Notification" />
 
 <table class="table table-striped">
     <thead>
@@ -26,6 +28,7 @@
             <th scope="col">Category Name</th>
             <th scope="col">Display Order</th>
             <th scope="col">Date</th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
@@ -36,6 +39,14 @@
                     <td>@obj.Name</td>
                     <td>@obj.DisplayOrder</td>
                     <td>@obj.DateCreate</td>
+                    <td>
+                        <div class="w-75 btn-group " role="group">
+                            <a asp-controller="Category" asp-action="Edit" asp-route-id="@obj.Id">
+                                <i class="bi bi-pencil-square text-info"></i> </a>
+                            &nbsp; &nbsp; &nbsp;
+                            <a asp-controller="Category" asp-action="Delete" asp-route-id="@obj.Id"><i class="bi bi-trash3 text-danger-emphasis"></i> </a>
+                        </div>
+                    </td>
                </tr>
         }
             
